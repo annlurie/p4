@@ -13,21 +13,17 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('home');
 });
 
-Route::get('/test', function()
-{
-	return "Hello!";
-});
-
+/* Throwaway Routes - delete before submitting. */
 Route::get('/practice', function() {
-
-    $fruit = Array('Apples', 'Oranges', 'Pears');
-
-    echo Pre::render($fruit,'Fruit');
-
+    echo App::environment();
 });
+
+
+
+/* Routes for testing and debugging. Keep these! */
 
 Route::get('/get-environment',function() {
 

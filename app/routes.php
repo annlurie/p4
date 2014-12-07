@@ -20,7 +20,7 @@ Route::get('/', function()
 /* DATABASE PRACTICE ROUTES*/
 Route::get('/creating', function() {
 
-    # Instantiate a new Book model class
+    # Instantiate a new Task
     $task = new Task();
 
     # Set 

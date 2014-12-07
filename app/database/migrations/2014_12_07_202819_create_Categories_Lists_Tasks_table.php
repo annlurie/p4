@@ -12,7 +12,7 @@ class CreateCategoriesListsTasksTable extends Migration {
 	 */
 public function up() {
 
-    Schema::create('lists', function($table) {
+    Schema::create('tasklists', function($table) {
 
         #Auto-Incrementing Primary Key:
         $table->increments('id');
@@ -37,10 +37,10 @@ public function up() {
         $table->string('shortDesc');
         $table->text('longDesc');
         $table->integer('priority');
-        $table->integer('list_id')->unsigned();
+        $table->integer('tasklist_id')->unsigned();
 
-        # Foreign Key (Maps to Lists Table):
-        $table->foreign('list_id')->references('id')->on('lists');
+        # Foreign Key (Maps to Tasklists Table):
+        $table->foreign('tasklist_id')->references('id')->on('tasklists');
     });
 
 	# Create the categories table
@@ -54,7 +54,7 @@ public function up() {
 		$table->string('name', 64);
 
 	}); 
-
+/*
 	# Pivot Table for categories:tasks relationship:
 	Schema::create('category_task', function($table) {
 
@@ -66,7 +66,7 @@ public function up() {
 		$table->foreign('category_id')->references('id')->on('categories');
 		$table->foreign('task_id')->references('id')->on('tasks');
 	}); 
-
+*/
 }
 
 	/**
@@ -76,9 +76,9 @@ public function up() {
 	 */
 	public function down()
 	{
-		Schema::drop('lists');
+		Schema::drop('tasklists');
 		Schema::drop('tasks');
 		Schema::drop('categories');
-		Schema::drop('category_task');
+		#Schema::drop('category_task');
 	}
 }

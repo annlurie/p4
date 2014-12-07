@@ -18,7 +18,15 @@ Route::get('/', function()
 });
 
 /* DATABASE PRACTICE ROUTES*/
-Route::get('/creating', function() {
+
+Route::get('/taskTest', function() {
+
+	$tasklist = new Tasklist();
+
+	$tasklist->title = 'To Dos for P4';
+	$tasklist->desc = 'Description of list: To Dos for P4';
+
+	$tasklist->save();
 
     # Instantiate a new Task
     $task = new Task();
@@ -27,11 +35,48 @@ Route::get('/creating', function() {
     $task->shortDesc = 'Create the table for tasks_users';
     $task->longDesc = 'This is one of the things I have to do to finish this project';
     $task->priority = 3;
+    $task->tasklist_id = $tasklist->id;
 
     # This is where the Eloquent ORM magic happens
     $task->save();
 
-    return 'A new book has been added! Check your database to see...';
+    return 'A new task has been added! Check your database to see...';
+
+});
+
+Route::get('/seedCat', function() {
+
+	#Create some preliminary Categories
+	$category = new Category();
+	$category->name = 'Work';
+	$category->save();
+
+	#Create some preliminary Categories
+	$category = new Category();
+	$category->name = 'Home';
+	$category->save();
+
+	#Create some preliminary Categories
+	$category = new Category();
+	$category->name = 'Money';
+	$category->save();	
+
+	#Create some preliminary Categories
+	$category = new Category();
+	$category->name = 'Kids';
+	$category->save();
+
+	#Create some preliminary Categories
+	$category = new Category();
+	$category->name = 'Health';
+	$category->save();
+
+	#Create some preliminary Categories
+	$category = new Category();
+	$category->name = 'Hobbies';
+	$category->save();
+
+	return 'Default categories created: Work, Home, Money, Kids, Health, Hobbies';
 
 });
 

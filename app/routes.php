@@ -17,6 +17,47 @@ Route::get('/', function()
 	return View::make('home');
 });
 
+Route::get('/formstl', function()
+{
+	return View::make('formstl');
+});
+
+Route::post('/formstl', function()
+{
+	$data = Input::all();
+	echo Pre::render($data);
+
+	$tasklist = new Tasklist();
+
+	$tasklist->title = $data['title'];
+	$tasklist->desc = $data['desc'];
+
+	$tasklist->save();
+
+});
+
+Route::get('/formst', function()
+{
+	return View::make('formst');
+});
+
+Route::post('/formst', function()
+{
+	$data = Input::all();
+	echo Pre::render($data);
+
+	$task = new Task();
+
+	$task->shortDesc = $data['shortDesc'];
+	$task->longDesc = $data['longDesc'];
+	$task->priority = (int)$data['priority'];
+	$task->tasklist_id = (int)$data['tasklist_id'];
+
+	$task->save();
+	echo 'new task created';
+
+});
+
 /* DATABASE PRACTICE ROUTES*/
 
 Route::get('/taskTest', function() {

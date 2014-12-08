@@ -1,4 +1,4 @@
-@extends('master')
+@extends('_master')
 
 @section ('title')
 	Developer's Best Friend

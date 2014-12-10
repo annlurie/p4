@@ -14,11 +14,11 @@ Task Form
 {{ Form::textarea('longDesc', 'Enter Long Description or Notes or Whatever You Want') }} <p>
 {{ Form::label('priority', 'Priority') }} <p>
 {{ Form::select('priority', array(
-        '1'       => 'High',
+        '1'     => 'High',
         '2'     => 'Medium',
         '3'     => 'Low'
     ), '1') }} <p>
-{{ Form::hidden('tasklist_id', '4') }}
+{{ Form::hidden('tasklist_id', '1') }}
 {{ Form::submit('Save') }}
 {{ Form::close() }}
 @stop

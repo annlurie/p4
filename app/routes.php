@@ -36,12 +36,12 @@ Route::post('/formstl', function()
 
 });
 
-Route::get('/formst', function()
+Route::get('/list_create', function()
 {
-	return View::make('formst');
+	return View::make('list_create');
 });
 
-Route::post('/formst', function()
+Route::post('/list_create', function()
 {
 	$data = Input::all();
 	echo Pre::render($data);
@@ -51,11 +51,28 @@ Route::post('/formst', function()
 	$task->shortDesc = $data['shortDesc'];
 	$task->longDesc = $data['longDesc'];
 	$task->priority = (int)$data['priority'];
+	$task->complete = (0);
 	$task->tasklist_id = (int)$data['tasklist_id'];
 
 	$task->save();
 	echo 'new task created';
 
+});
+
+Route::get('/list_update', function()
+{
+	return View::make('list_update');
+});
+
+Route::post('/list_update', function()
+{
+	echo 'list updated';
+	#return View::make('list_update');
+});
+
+Route::get('/list', function()
+{
+	return View::make('list');
 });
 
 /* DATABASE PRACTICE ROUTES*/

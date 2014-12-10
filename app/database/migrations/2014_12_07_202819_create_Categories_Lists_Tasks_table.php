@@ -37,6 +37,7 @@ public function up() {
         $table->string('shortDesc');
         $table->text('longDesc');
         $table->integer('priority');
+        $table->boolean('complete');
         $table->integer('tasklist_id')->unsigned();
 
         # Foreign Key (Maps to Tasklists Table):

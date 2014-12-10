@@ -36,6 +36,12 @@ Route::post('/formstl', function()
 
 });
 
+
+Route::get('/list', function()
+{
+	return View::make('list');
+});
+
 Route::get('/list_create', function()
 {
 	return View::make('list_create');
@@ -70,10 +76,6 @@ Route::post('/list_update', function()
 	#return View::make('list_update');
 });
 
-Route::get('/list', function()
-{
-	return View::make('list');
-});
 
 /* DATABASE PRACTICE ROUTES*/
 

@@ -5,5 +5,5 @@ Task Form
 @stop
 
 @section('content')
-<h1>List Update Page</h1>
+<h1>Task Update Page</h1>
 @stop

@@ -17,29 +17,38 @@ Route::get('/', function()
 	return View::make('home');
 });
 
-Route::get('/formstl', function()
+Route::get('/taskread', function()
 {
-	return View::make('formstl');
+    $tasks = Task::all();
+    foreach ($tasks as $task) {
+        echo $task->shortDesc;
+    }
 });
 
-Route::post('/formstl', function()
+Route::get('/task_create', function()
 {
-	$data = Input::all();
-	echo Pre::render($data);
-
-	$tasklist = new Tasklist();
-
-	$tasklist->title = $data['title'];
-	$tasklist->desc = $data['desc'];
-
-	$tasklist->save();
-
+return View::make('task_create');
+});
+Route::post('/task_create', function()
+{
+$data = Input::all();
+echo Pre::render($data);
+$task = new Task();
+$task->shortDesc = $data['shortDesc'];
+$task->longDesc = $data['longDesc'];
+$task->priority = (int)$data['priority'];
+$task->tasklist_id = (int)$data['tasklist_id'];
+$task->save();
+echo 'new task created';
 });
 
 
-Route::get('/list', function()
+Route::get('/list/{tasklist_id}', function($id)
 {
-	return View::make('list');
+	$tasklist = Tasklist::find($id);
+	$tasks = Task::all();
+	return View::make('list')->with('tasklist', $tasklist)->with('tasks', $tasks);
+
 });
 
 Route::get('/list_create', function()
@@ -52,16 +61,13 @@ Route::post('/list_create', function()
 	$data = Input::all();
 	echo Pre::render($data);
 
-	$task = new Task();
+	$tasklist = new Tasklist();
 
-	$task->shortDesc = $data['shortDesc'];
-	$task->longDesc = $data['longDesc'];
-	$task->priority = (int)$data['priority'];
-	$task->complete = (0);
-	$task->tasklist_id = (int)$data['tasklist_id'];
+	$tasklist->title = $data['title'];
+	$tasklist->desc = $data['desc'];
 
-	$task->save();
-	echo 'new task created';
+	$tasklist->save();
+	return View::make('/list')->with('tasklist', $tasklist);
 
 });
 
@@ -73,9 +79,32 @@ Route::get('/list_update', function()
 Route::post('/list_update', function()
 {
 	echo 'list updated';
-	#return View::make('list_update');
+	#return View::make('list');
 });
 
+/*
+Route::get('/task', function()
+{
+	return View::make('task_create');
+});
+
+Route::post('/task_create', function()
+{
+	$data = Input::all();
+	echo Pre::render($data);
+
+	$task = new Task();
+
+	$task->shortDesc = $data['shortDesc'];
+	$task->longDesc = $data['longDesc'];
+	$task->priority = (int)$data['priority'];
+	$task->tasklist_id = (int)$data['tasklist_id'];
+
+	$task->save();
+	return View::make('task')->with('task', $task);
+
+});
+*/
 
 /* DATABASE PRACTICE ROUTES*/
 

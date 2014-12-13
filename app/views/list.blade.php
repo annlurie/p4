@@ -8,14 +8,24 @@ Task Form
 <h2>Show list title and description</h2>
 {{ $tasklist->title }}; <br>
 {{ $tasklist->desc }}; <br>
-{{$id}} <br>
+<br>
 
-<h2>Show all the tasks associated with the list</h2>
+<h2>Edit Links for Tasks</h2>
 
 @if(isset($tasks))
 	@foreach ($tasks as $task)
 		@if ($task->tasklist_id == $id)
 	    	<li><a href="/task_update/{{$task->id}}">{{ $task->shortDesc }}</a></li>
+	    @endif
+	@endforeach
+@endif
+
+<h2>Read Links for Tasks</h2>
+
+@if(isset($tasks))
+	@foreach ($tasks as $task)
+		@if ($task->tasklist_id == $id)
+	    	<li><a href="/task/{{$task->id}}">{{ $task->shortDesc }}</a></li>
 	    @endif
 	@endforeach
 @endif

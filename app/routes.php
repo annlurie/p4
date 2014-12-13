@@ -5,11 +5,6 @@ Route::get('/', function()
 	return View::make('home');
 });
 
-Route::get('/a/b', function ()
-{
-	echo 'a/b';
-});
-
 Route::get('/task/{task_id}', function($id)
 {
 	$task = Task::find($id);
@@ -49,29 +44,7 @@ Route::post('task/update/{id}', function($id) {
 	$task->save();
 
 	echo 'Task Updated';
-
-
 });
-
-/*
-Route::post('/task_create', function()
-{
-	$data = Input::all();
-	echo Pre::render($data);
-	$task = new Task();
-	$task->shortDesc = $data['shortDesc'];
-	$task->longDesc = $data['longDesc'];
-	$task->priority = (int)$data['priority'];
-	$task->tasklist_id = (int)$data['tasklist_id'];
-	$task->save();
-	return View::make('task')->with('task', $task);
-});
-
-Route::get('/task_create', function()
-{
-	return View::make('task_create');
-});
-*/
 
 Route::get('/task/create', function()
 {
@@ -94,6 +67,17 @@ Route::post('/task/create', function()
 	->with('task', $task)
 	->with('tasklist', $tasklist);
 });
+
+/* LIST ROUTES */
+Route::get('/list', function()
+{
+	echo 'output all the lists';
+});
+
+Route::get('/list/update/{tasklist_id}', function($id)
+	{
+		echo 'update view for task list #'.$id;
+	});
 
 Route::get('/list/{tasklist_id}', function($id)
 {
@@ -118,7 +102,7 @@ Route::post('/list_create', function()
 	$tasklist->title = $data['title'];
 	$tasklist->desc = $data['desc'];
 	$tasklist->save();
-	return View::make('/list')->with('tasklist', $tasklist);
+	return View::make('/list/{tasklist_id}')->with('tasklist', $tasklist);
 });
 
 Route::get('/list_update', function()

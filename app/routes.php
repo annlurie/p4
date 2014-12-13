@@ -5,11 +5,34 @@ Route::get('/', function()
 	return View::make('home');
 });
 
+Route::get('/a/b', function ()
+{
+	echo 'a/b';
+});
+
 Route::get('/task/{task_id}', function($id)
 {
 	$task = Task::find($id);
 	return View::make('task')
 	->with('task', $task);
+});
+
+Route::get('/task_update/{task_id}', function($id)
+{
+/*
+	echo 'edit task '.$id;
+	$task = Task::find($id);
+	echo Pre::render($task);
+*/
+	$task = Task::find($id);
+	return View::make('task_update')
+	->with('task', $task);
+
+});
+
+Route::get('/task_update', function()
+{
+	echo 'edit task';
 });
 
 Route::post('/task_create', function()
@@ -28,19 +51,6 @@ Route::post('/task_create', function()
 Route::get('/task_create', function()
 {
 	return View::make('task_create');
-});
-
-Route::post('/task_create', function()
-{
-	$data = Input::all();
-	echo Pre::render($data);
-	$task = new Task();
-	$task->shortDesc = $data['shortDesc'];
-	$task->longDesc = $data['longDesc'];
-	$task->priority = (int)$data['priority'];
-	$task->tasklist_id = (int)$data['tasklist_id'];
-	$task->save();
-	echo 'new task created';
 });
 
 Route::get('/task/create', function()

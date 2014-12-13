@@ -24,6 +24,12 @@ Route::get('/task_update/{task_id}', function($id)
 	->with('task', $task);
 });
 
+Route::get('task_update/{task_id}', array('as' => 'task.edit', function($id) 
+{
+	return View::make('task_update')
+	->with('task', Task::find($id));
+}));
+
 Route::post('/task_update', function()
 {
 	$data = Input::all();
@@ -37,8 +43,21 @@ Route::get('task/update/{id}', array('as' => 'task.edit', function($id)
 	->with('task', Task::find($id));
 }));
 
-Route::post('task/update', function() {
-	// process our form
+Route::post('task/update/{id}', function($id) {
+	$data = Input::all();
+	echo Pre::render($data);
+
+	$task = Task::find($data['id']);
+	echo Pre::render($task);
+
+	$task->shortDesc = $data['shortDesc'];
+	$task->longDesc = $data['longDesc'];
+	$task->priority = (int)$data['priority'];
+	$task->save();
+
+	echo 'Task Updated';
+
+
 });
 
 /*

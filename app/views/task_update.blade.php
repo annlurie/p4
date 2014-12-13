@@ -13,6 +13,7 @@ Task Form
 
 <h1>New-Style Form</h1>
 {{ Form::model($task, array('route' => 'task.edit', $task->id)) }}
+{{ Form::hidden('id') }}
 {{ Form::label('shortDesc', 'Short Description') }}
 {{ Form::text('shortDesc') }} <p>
 {{ Form::label('longDesc', 'Description') }} <p>
@@ -23,5 +24,6 @@ Task Form
 '2' => 'Medium',
 '3' => 'Low'
 )) }} <p>
+{{ Form::submit('Update Task') }}
 {{ Form::close() }}
 @stop

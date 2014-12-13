@@ -74,11 +74,6 @@ Route::get('/list', function()
 	echo 'output all the lists';
 });
 
-Route::get('/list/update/{tasklist_id}', function($id)
-	{
-		echo 'update view for task list #'.$id;
-	});
-
 Route::get('/list/{tasklist_id}', function($id)
 {
 	$tasklist = Tasklist::find($id);
@@ -88,6 +83,29 @@ Route::get('/list/{tasklist_id}', function($id)
 	->with('tasks', $tasks)
 	->with('id', $id);
 });
+
+Route::get('list/update/{tasklist_id}', array('as' => 'tasklist.edit', function($id) 
+{
+	return View::make('list_update')
+	->with('tasklist', Tasklist::find($id));
+}));
+
+Route::post('list/update/{tasklist_id}', function($id) 
+	{
+		$data = Input::all();
+		echo Pre::render($data);
+
+		$tasklist = Tasklist::find($data['id']);
+		echo Pre::render($tasklist);
+		$tasklist->title = $data['title'];
+		$tasklist->title = $data['title'];
+		$tasklist->desc = $data['desc'];
+		$tasklist->save();
+		
+		
+		$tasklist->save();
+		echo 'Tasklist Updated';
+	});
 
 Route::get('/list_create', function()
 {
@@ -103,17 +121,6 @@ Route::post('/list_create', function()
 	$tasklist->desc = $data['desc'];
 	$tasklist->save();
 	return View::make('/list/{tasklist_id}')->with('tasklist', $tasklist);
-});
-
-Route::get('/list_update', function()
-{
-	return View::make('list_update');
-});
-
-Route::post('/list_update', function()
-{
-	echo 'list updated';
-	#return View::make('list');
 });
 
 /* DATABASE PRACTICE ROUTES*/

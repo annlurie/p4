@@ -1,14 +1,14 @@
 @extends('_master')
 
 @section('title')
-Task Form
+List
 @stop
 
 @section('content')
-<h2>Show list title and description</h2>
+<h2>List Title and Description</h2>
 {{ $tasklist->title }}; <br>
 {{ $tasklist->desc }}; <br>
-<br>
+ <a href="/list/update/{{$tasklist->id}}">Edit this list</a>. <br>
 
 <h2>Edit Links for Tasks</h2>
 

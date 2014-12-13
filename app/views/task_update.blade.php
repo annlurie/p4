@@ -11,19 +11,17 @@ Task Form
 {{ $task->longDesc }}<br>
 {{ $task->priority }}<br>
 
-{{ Form::open(array('url' => '/task/update')) }}
-{{ Form::label('shortDesc', 'Short Description') }} <p>
-{{ Form::text('shortDesc', '$task->shortDesc') }} <p>
+<h1>New-Style Form</h1>
+{{ Form::model($task, array('route' => 'task.edit', $task->id)) }}
+{{ Form::label('shortDesc', 'Short Description') }}
+{{ Form::text('shortDesc') }} <p>
 {{ Form::label('longDesc', 'Description') }} <p>
-{{ Form::textarea('longDesc', '$task->longDesc') }} <p>
+{{ Form::textarea('longDesc') }} <p>
 {{ Form::label('priority', 'Priority') }}
 {{ Form::select('priority', array(
 '1' => 'High',
 '2' => 'Medium',
 '3' => 'Low'
-), '$task->priority') }} <p>
-{{ Form::label('$id', '$id') }}
-{{ Form::number('tasklist_id', '(int)$id') }}
-{{ Form::submit('Save') }}
+)) }} <p>
 {{ Form::close() }}
 @stop

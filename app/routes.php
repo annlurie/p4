@@ -19,22 +19,29 @@ Route::get('/task/{task_id}', function($id)
 
 Route::get('/task_update/{task_id}', function($id)
 {
-/*
-	echo 'edit task '.$id;
-	$task = Task::find($id);
-	echo Pre::render($task);
-*/
 	$task = Task::find($id);
 	return View::make('task_update')
 	->with('task', $task);
-
 });
 
-Route::get('/task_update', function()
+Route::post('/task_update', function()
 {
-	echo 'edit task';
+	$data = Input::all();
+	echo Pre::render($data);
+	echo 'Task Updated';
 });
 
+Route::get('task/update/{id}', array('as' => 'task.edit', function($id) 
+{
+	return View::make('task_update')
+	->with('task', Task::find($id));
+}));
+
+Route::post('task/update', function() {
+	// process our form
+});
+
+/*
 Route::post('/task_create', function()
 {
 	$data = Input::all();
@@ -52,6 +59,7 @@ Route::get('/task_create', function()
 {
 	return View::make('task_create');
 });
+*/
 
 Route::get('/task/create', function()
 {
@@ -61,14 +69,18 @@ Route::get('/task/create', function()
 Route::post('/task/create', function()
 {
 	$data = Input::all();
-	echo Pre::render($data);
+	#echo Pre::render($data);
 	$task = new Task();
 	$task->shortDesc = $data['shortDesc'];
 	$task->longDesc = $data['longDesc'];
 	$task->priority = (int)$data['priority'];
 	$task->tasklist_id = (int)$data['tasklist_id'];
 	$task->save();
-	echo 'new task created';
+
+	$tasklist = Tasklist::find($task->tasklist_id);
+	return View::make('task')
+	->with('task', $task)
+	->with('tasklist', $tasklist);
 });
 
 Route::get('/list/{tasklist_id}', function($id)

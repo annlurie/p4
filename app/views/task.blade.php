@@ -9,6 +9,8 @@ Task Form
 {{ $task->shortDesc }}<br>
 {{ $task->longDesc }}<br>
 {{ $task->priority }}<br>
-<h2><a href = "/task/udpate/{{$task->id}}">Edit Task</a> Link</h2>
+<h2>Edit Task Link</h2>
+<h2>Back to task list {{$task->tasklist_id}}: <a href="/list/{{$task->tasklist_id}}">Task List</a></h2>
+{{Pre::render($tasklist)}}
 <h2>Complete Task Functionality</h2>
 @stop

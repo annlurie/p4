@@ -104,12 +104,12 @@ Route::get('/list_create', function()
 Route::post('/list_create', function()
 {
 	$data = Input::all();
-	echo Pre::render($data);
+	#echo Pre::render($data);
 	$tasklist = new Tasklist();
 	$tasklist->title = $data['title'];
 	$tasklist->desc = $data['desc'];
 	$tasklist->save();
-	return View::make('/list/{tasklist_id}')->with('tasklist', $tasklist);
+	return View::make('list')->with('tasklist', $tasklist);
 });
 
 /* DATABASE PRACTICE ROUTES*/

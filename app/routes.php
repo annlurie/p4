@@ -1,27 +1,28 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
 /* Real Routes! */
 Route::get('/', function()
 {
 	return View::make('home');
 });
 
-Route::get('/taskread', function()
+Route::get('/task/{task_id}', function($id)
 {
-	$tasks = Task::all();
-	foreach ($tasks as $task) 
-	{
-		echo $task->shortDesc;
-	}
+	$task = Task::find($id);
+	return View::make('task')
+	->with('task', $task);
+});
+
+Route::post('/task_create', function()
+{
+	$data = Input::all();
+	echo Pre::render($data);
+	$task = new Task();
+	$task->shortDesc = $data['shortDesc'];
+	$task->longDesc = $data['longDesc'];
+	$task->priority = (int)$data['priority'];
+	$task->tasklist_id = (int)$data['tasklist_id'];
+	$task->save();
+	return View::make('task')->with('task', $task);
 });
 
 Route::get('/task_create', function()
@@ -42,13 +43,32 @@ Route::post('/task_create', function()
 	echo 'new task created';
 });
 
+Route::get('/task/create', function()
+{
+	return View::make('task_create');
+});
+
+Route::post('/task/create', function()
+{
+	$data = Input::all();
+	echo Pre::render($data);
+	$task = new Task();
+	$task->shortDesc = $data['shortDesc'];
+	$task->longDesc = $data['longDesc'];
+	$task->priority = (int)$data['priority'];
+	$task->tasklist_id = (int)$data['tasklist_id'];
+	$task->save();
+	echo 'new task created';
+});
+
 Route::get('/list/{tasklist_id}', function($id)
 {
 	$tasklist = Tasklist::find($id);
 	$tasks = Task::all();
 	return View::make('list')
 	->with('tasklist', $tasklist)
-	->with('tasks', $tasks);
+	->with('tasks', $tasks)
+	->with('id', $id);
 });
 
 Route::get('/list_create', function()
@@ -78,24 +98,6 @@ Route::post('/list_update', function()
 	#return View::make('list');
 });
 
-/*
-Route::get('/task', function()
-{
-return View::make('task_create');
-});
-Route::post('/task_create', function()
-{
-$data = Input::all();
-echo Pre::render($data);
-$task = new Task();
-$task->shortDesc = $data['shortDesc'];
-$task->longDesc = $data['longDesc'];
-$task->priority = (int)$data['priority'];
-$task->tasklist_id = (int)$data['tasklist_id'];
-$task->save();
-return View::make('task')->with('task', $task);
-});
-*/
 /* DATABASE PRACTICE ROUTES*/
 Route::get('/taskTest', function() {
 $tasklist = new Tasklist();

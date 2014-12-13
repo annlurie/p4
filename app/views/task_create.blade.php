@@ -3,10 +3,11 @@
 @section('title')
 Task Form
 @stop
+
 @section('content')
 <h1>FORMS FOR DB WRITE TESTING</h1>
 <h2>Add A Task:</h2>
-{{ Form::open(array('url' => '/task_create')) }}
+{{ Form::open(array('url' => '/task/create')) }}
 {{ Form::label('shortDesc', 'Short Description') }} <p>
 {{ Form::text('shortDesc', 'Enter Short Description') }} <p>
 {{ Form::label('longDesc', 'Description') }} <p>

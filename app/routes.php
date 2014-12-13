@@ -12,19 +12,6 @@ Route::get('/task/{task_id}', function($id)
 	->with('task', $task);
 });
 
-Route::get('task_update/{task_id}', array('as' => 'task.edit', function($id) 
-{
-	return View::make('task_update')
-	->with('task', Task::find($id));
-}));
-
-Route::post('/task_update', function()
-{
-	$data = Input::all();
-	echo Pre::render($data);
-	echo 'Task Updated';
-});
-
 Route::get('task/update/{id}', array('as' => 'task.edit', function($id) 
 {
 	return View::make('task_update')

@@ -33,9 +33,11 @@
   </div><!--close navbar-->
 
     <!--Main content section. Defined in child blade templates-->
-    <div class="container">
+    <div class="jumbotron">
+      <div class="container">
     @yield('content')
     </div>
+  </div>
 
 	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

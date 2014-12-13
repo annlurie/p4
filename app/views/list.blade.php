@@ -15,7 +15,7 @@ List
 @if(isset($tasks))
 	@foreach ($tasks as $task)
 		@if ($task->tasklist_id == $id)
-	    	<li><a href="/task_update/{{$task->id}}">{{ $task->shortDesc }}</a></li>
+	    	<li><a href="/task/update/{{$task->id}}">{{ $task->shortDesc }}</a></li>
 	    @endif
 	@endforeach
 @endif

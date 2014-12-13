@@ -1,7 +1,7 @@
 @extends('_master')
 
 @section ('title')
-	Developer's Best Friend
+	View All Lists
 @stop
 
 @section ('content')
@@ -11,8 +11,12 @@
       <div class="container">
         <h1>To Do Lists</h1>
         <p>Contents of page: 
-          <li>Show all existing lists (each is a link to the list)
-          <li><a href="/list_create">Add New List</a> button</p>
+          <li><a href="/list_create">Add New List</a></p>
+          @if(isset($tasklist))
+  @foreach ($tasklist as $tasklist)
+        <li><a href="/list/{{$tasklist->id}}">{{ $tasklist->title }}</a></li>
+  @endforeach
+@endif
       </div>
     </div>
 

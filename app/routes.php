@@ -71,7 +71,9 @@ Route::post('/task/create', function()
 /* LIST ROUTES */
 Route::get('/list', function()
 {
-	echo 'output all the lists';
+	$tasklist = Tasklist::all();
+	return View::make('home')
+	->with('tasklist', $tasklist);
 });
 
 Route::get('/list/{tasklist_id}', function($id)

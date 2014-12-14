@@ -1,7 +1,7 @@
 @extends('_master')
 
 @section('title')
-Task Form
+Edit a Task
 @stop
 
 @section('content')
@@ -19,6 +19,8 @@ Task Form
 '2' => 'Medium',
 '3' => 'Low'
 )) }} <p>
+{{ Form::label('complete', 'Complete This Task') }}
+{{ Form::checkbox('complete') }}<p>
 {{ Form::submit('Update Task') }}
 {{ Form::close() }}
 @stop

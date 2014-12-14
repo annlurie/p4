@@ -23,14 +23,15 @@ Route::post('task/update/{id}', function($id) {
 	echo Pre::render($data);
 
 	$task = Task::find($data['id']);
-	echo Pre::render($task);
 
 	$task->shortDesc = $data['shortDesc'];
 	$task->longDesc = $data['longDesc'];
 	$task->priority = (int)$data['priority'];
+	$task->complete = $data['complete'];
 	$task->save();
 
 	echo 'Task Updated';
+	echo Pre::render ($task);
 });
 
 Route::get('/task/create', function()
@@ -110,6 +111,14 @@ Route::post('/list_create', function()
 	$tasklist->desc = $data['desc'];
 	$tasklist->save();
 	return View::make('list')->with('tasklist', $tasklist);
+});
+
+Route::get('/list/delete/{tasklist_id}', function($id)
+{
+	$tasklist = Tasklist::find($id);
+	$tasklist->delete();
+	$tasklist = Tasklist::all();
+	return Redirect::to('/list');
 });
 
 /* DATABASE PRACTICE ROUTES*/

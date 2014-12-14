@@ -6,4 +6,5 @@ Delete View
 
 @section('content')
 This is the Delete List View
+{{Pre::render($tasklist)}}
 @stop

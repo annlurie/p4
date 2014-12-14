@@ -1,7 +1,7 @@
 @extends('_master')
 
 @section('title')
-Task Form
+Task
 @stop
 
 @section('content')

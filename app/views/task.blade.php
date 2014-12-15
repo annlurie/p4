@@ -1,6 +1,7 @@
 <h1>Welcome to TASK READ</h1>
 <h2>This is the view that shows a single task if passed via param, and a friendly error message if not.</h2>
 @if (isset($task))
+	{{$task->complete}}
 	{{ Pre::render($task) }}
 	<h2>Output the contents of the task.</h2>
 	<h2>Provide a link back to the associated list.</h2>

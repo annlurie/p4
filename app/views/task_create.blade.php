@@ -14,6 +14,12 @@
 '2' => 'Medium',
 '3' => 'Low'
 ), '1') }}
+<p>
+{{--
+{{ Form::label('complete', 'Complete') }} <br>
+{{ Form::checkbox('agree') }}
+--}}
+{{Form::hidden('complete', '0')}}
 {{Form::hidden('tasklist_id', '38')}}
 <p>
 {{ Form::submit('Save') }}

@@ -132,6 +132,7 @@ Route::post('/task/create', function()
 	$task->shortDesc = $data['shortDesc'];
 	$task->longDesc = $data['longDesc'];
 	$task->priority = (int)$data['priority'];
+	$task->complete = (int)$data['complete'];
 	$task->tasklist_id = (int)$data['tasklist_id'];
 	$task->save();
 	return View::make('task')->with('task', $task);
@@ -147,6 +148,13 @@ Route::get('task/update/{id}', array('as' => 'task.edit', function($id)
 	return View::make('task_update')
 	->with('task', Task::find($id));
 }));
+
+Route::get('task/complete/{id}', function($id)
+{
+	$task = Task::find($id);
+	$task->complete = 1;
+	$task->save();
+});
 
 Route::post('task/update/{id}', function($id) 
 {

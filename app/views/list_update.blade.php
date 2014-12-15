@@ -1,17 +1,9 @@
-@extends('_master')
+<h1> Welcome to LIST UPDATE </h1>
 
-@section('title')
-Edit a List
-@stop
+@if (isset($tasklist))
+	{{Pre::render($tasklist)}}
+@endif
 
-@section('content')
-<h1>List Update Page</h1>
-{{ Form::model($tasklist, array('route' => 'tasklist.edit', $tasklist->id)) }}
-{{ Form::hidden('id') }}
-{{ Form::label('title', 'Title') }} <p>
-{{ Form::text('title') }} <p>
-{{ Form::label('desc', 'Description') }} <p>
-{{ Form::textarea('desc') }} <p>
-{{ Form::submit('Update List') }}
+{{ Form::open(array('url' => '/list/update')) }}
+{{ Form::submit('Save') }}
 {{ Form::close() }}
-@stop

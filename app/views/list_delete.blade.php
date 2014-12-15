@@ -6,5 +6,8 @@
 @endif
 
 {{ Form::open(array('url' => '/list/delete')) }}
+@if (isset($tasklist))
+{{Form::hidden('tasklist_id', $tasklist->id)}}
+@endif
 {{ Form::submit('Delete') }}
 {{ Form::close() }}

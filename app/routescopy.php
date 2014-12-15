@@ -1,10 +1,5 @@
 <?php
 
-Route::get('/test', function()
-{
-	echo 'test';
-});
-
 /* Real Routes! */
 
 Route::get('/', function()

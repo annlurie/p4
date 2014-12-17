@@ -2,9 +2,7 @@
 
 Route::get('/', function()
 {
-	$listall = Tasklist::all();
-	return View::make('list')
-	->with('listall', $listall);
+	return View::make('home');
 });
 
 /* ALL THE ROUTES FOR LISTS */
@@ -208,8 +206,9 @@ Route::post('/task/delete', function()
 	#echo Pre::render($data);
 	$task = Task::find((int)$data['id']);
 	$tasklist = Tasklist::find($task->tasklist_id);
+	$tasks = Task::where('tasklist_id','=',$tasklist->id)->get();
 	#echo 'Task ID is: '.Pre::render($task->id);
-	#$task->delete();
+	$task->delete();
 	#echo 'Task deleted';
-	return View::make('list')->with('tasklist', $tasklist);
+	return View::make('list')->with('tasklist', $tasklist)->with('tasks', $tasks);
 });

@@ -96,6 +96,11 @@ Route::post('/list/delete', function()
 	$data = Input::all();
 	echo Pre::render($data);
 	$tasklist = Tasklist::find((int)$data['tasklist_id']);
+	$task = Task::where('tasklist_id','=',$tasklist->id)->get();
+	foreach($task as $tasks)
+	{
+		$tasks->delete();
+	}
 	echo 'Tasklist ID is: '.Pre::render($tasklist->id);
 	$tasklist->delete();
 	echo 'List deleted';

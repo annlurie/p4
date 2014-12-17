@@ -2,14 +2,18 @@
 
 Route::get('/', function()
 {
-	return View::make('index');
+	$listall = Tasklist::all();
+	return View::make('list')
+	->with('listall', $listall);
 });
 
 /* ALL THE ROUTES FOR LISTS */
 
 Route::get('/list', function()
 {
-	return View::make('list');
+	$listall = Tasklist::all();
+	return View::make('list')
+	->with('listall', $listall);
 });
 
 Route::get('/list/view', function()
@@ -94,16 +98,16 @@ Route::get('/list/delete/{list_id}', function($id)
 Route::post('/list/delete', function()
 {
 	$data = Input::all();
-	echo Pre::render($data);
 	$tasklist = Tasklist::find((int)$data['tasklist_id']);
 	$task = Task::where('tasklist_id','=',$tasklist->id)->get();
 	foreach($task as $tasks)
 	{
 		$tasks->delete();
 	}
-	echo 'Tasklist ID is: '.Pre::render($tasklist->id);
 	$tasklist->delete();
-	echo 'List deleted';
+	$listall = Tasklist::all();
+	return View::make('list')
+	->with('listall', $listall);
 });
 
 /* ALL THE ROUTES FOR TASKS */
@@ -121,8 +125,10 @@ Route::get('/task/view', function()
 Route::get('/task/view/{task_id}', function($id)
 {
 	$task = Task::find($id);
+	$tasklist = Tasklist::find($task->id);
 	return View::make('task')
 	->with('task', $task);
+	#->with('tasklist', $tasklist);
 });
 
 Route::get('/task/create', function()
@@ -140,7 +146,15 @@ Route::post('/task/create', function()
 	$task->complete = (int)$data['complete'];
 	$task->tasklist_id = (int)$data['tasklist_id'];
 	$task->save();
-	return View::make('task')->with('task', $task);
+	$tasklist = Tasklist::find($task->tasklist_id);
+	$tasks = Task::where('tasklist_id','=',$tasklist->id)->get();
+	#echo 'Task List: '.$tasklist->id;	
+	#Pre::render($tasks);
+	#return View::make('task')->with('task', $task)
+	#->with('tasklist', $tasklist);
+	return View::make('list')
+	->with('tasklist', $tasklist)
+	->with('tasks', $tasks);
 });
 
 Route::get('/task/update', function()
@@ -154,13 +168,6 @@ Route::get('task/update/{id}', array('as' => 'task.edit', function($id)
 	->with('task', Task::find($id));
 }));
 
-Route::get('task/complete/{id}', function($id)
-{
-	$task = Task::find($id);
-	$task->complete = 1;
-	$task->save();
-});
-
 Route::post('task/update/{id}', function($id) 
 {
 	$data = Input::all();
@@ -173,8 +180,19 @@ Route::post('task/update/{id}', function($id)
 	$task->priority = (int)$data['priority'];
 	$task->save();
 
-	echo 'Task Updated';
-	echo Pre::render ($task);
+	$tasklist = Tasklist::find($task->tasklist_id);
+	return View::make('task')
+	->with('task', $task);
+});
+
+Route::get('task/complete/{id}', function($id)
+{
+	$task = Task::find($id);
+	$task->complete = 1;
+	$task->save();
+	$tasklist = Tasklist::find($task->id);
+	return View::make('task')
+	->with('task', $task);
 });
 
 Route::get('/task/delete/{task_id}', function($id)
@@ -183,28 +201,15 @@ Route::get('/task/delete/{task_id}', function($id)
 	return View::make('task_delete')
 	->with('task', $task);
 });
-/*
-Route::post('/list/delete', function()
-{
-	$data = Input::all();
-	echo Pre::render($data);
-	$tasklist = Tasklist::find((int)$data['tasklist_id']);
-	echo 'Tasklist ID is: '.Pre::render($tasklist->id);
-	$tasklist->delete();
-	echo 'List deleted';
-});
 
-Route::get('/task/delete', function()
-{
-	return View::make('task_delete');
-});
-*/
 Route::post('/task/delete', function()
 {
 	$data = Input::all();
-	echo Pre::render($data);
+	#echo Pre::render($data);
 	$task = Task::find((int)$data['id']);
-	echo 'Task ID is: '.Pre::render($task->id);
-	$task->delete();
-	echo 'List deleted';
+	$tasklist = Tasklist::find($task->tasklist_id);
+	#echo 'Task ID is: '.Pre::render($task->id);
+	#$task->delete();
+	#echo 'Task deleted';
+	return View::make('list')->with('tasklist', $tasklist);
 });

@@ -1,10 +1,4 @@
-<h1>Welcome to TASK UPDATE</h1>
-
-{{--
-{{ Form::open(array('url' => '/task/update')) }}
-{{ Form::submit('Save') }}
-{{ Form::close() }}
---}}
+<h2>Edit a Task</h2>
 
 {{ Form::model($task, array('route' => 'task.edit', $task->id)) }}
 {{ Form::hidden('id') }}
@@ -18,11 +12,6 @@
 '2' => 'Medium',
 '3' => 'Low'
 )) }} <p>
-
-{{--
-{{ Form::label('complete', 'Complete This Task') }}
-{{ Form::checkbox('complete') }}<p>
---}}
 
 {{ Form::submit('Update Task') }}
 {{ Form::close() }}

@@ -1,5 +1,8 @@
-<h1>Welcome to TASK READ</h1>
-<h2>This is the view that shows a single task if passed via param, and a friendly error message if not.</h2>
+@if (Session::has('message'))
+{{Session::get('message')}}
+@endif
+
+<h1>View a Task</h1>
 @if (isset($task))
 	<h2>{{$task->shortDesc}}</h2>
 	<h4>{{$task->longDesc}}</h4>

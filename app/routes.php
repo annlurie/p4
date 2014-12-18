@@ -1,5 +1,10 @@
 <?php
 
+Route::get('flashtest', function()
+{
+	return Redirect::to('/')->with('message', 'here is a flash message');
+});
+
 Route::get('/', function()
 {
 	return View::make('home');
@@ -46,7 +51,8 @@ Route::post('/list/create', function()
 	#echo Pre::render($tasklist);
 
 	return View::make('list')->with('tasklist', $tasklist);
-
+	#return Redirect::to('/list/view/$tasklist->id')->with('tasklist', $tasklist)->with('message', 'here is a flash message');
+	#return Redirect::route('list/view/', array('tasklist_id' => $tasklist->id));
 });
 
 Route::get('/list/update', function()
@@ -72,13 +78,12 @@ Route::post('list/update/{tasklist_id}', function($id)
 	$tasklist->desc = $data['desc'];
 	$tasklist->save();
 	
-	
-	$tasklist->save();
+	$tasks = Task::where('tasklist_id','=',$id)->get();
 	#echo 'Tasklist Updated';
 	#echo Pre::render($tasklist->title);
 	#echo Pre::render($tasklist->desc);
 
-	return View::make('list')->with('tasklist', $tasklist);
+	return View::make('list')->with('tasks', $tasks)->with('tasklist', $tasklist);
 });
 
 Route::get('/list/delete', function()
@@ -104,8 +109,7 @@ Route::post('/list/delete', function()
 	}
 	$tasklist->delete();
 	$listall = Tasklist::all();
-	return View::make('list')
-	->with('listall', $listall);
+	return Redirect::to('/list')->with('message', 'List Deleted')->with('listall', $listall);
 });
 
 /* ALL THE ROUTES FOR TASKS */
@@ -169,7 +173,7 @@ Route::get('task/update/{id}', array('as' => 'task.edit', function($id)
 Route::post('task/update/{id}', function($id) 
 {
 	$data = Input::all();
-	echo Pre::render($data);
+	#echo Pre::render($data);
 
 	$task = Task::find($data['id']);
 
@@ -206,9 +210,8 @@ Route::post('/task/delete', function()
 	#echo Pre::render($data);
 	$task = Task::find((int)$data['id']);
 	$tasklist = Tasklist::find($task->tasklist_id);
-	$tasks = Task::where('tasklist_id','=',$tasklist->id)->get();
-	#echo 'Task ID is: '.Pre::render($task->id);
 	$task->delete();
+	$tasks = Task::where('tasklist_id','=',$tasklist->id)->get();
 	#echo 'Task deleted';
 	return View::make('list')->with('tasklist', $tasklist)->with('tasks', $tasks);
 });
@@ -254,4 +257,40 @@ echo "Environment: ".App::environment();
 Route::get('/trigger-error',function() {
 # Class Foobar should not exist, so this should create an error
 $foo = new Foobar;
+});
+
+Route::get('/seed', function()
+{
+	$tasklist = new Tasklist();
+	$tasklist->title = 'First Tasklist...';
+	$tasklist->desc = '...created via the seed route.';
+	$tasklist->save();
+	
+	$task = new Task();
+	$task->shortDesc = 'Seeded Task #1';
+	$task->longDesc = 'This is the first task created via the seed route.';
+	$task->priority = 1;
+	$task->tasklist_id = $tasklist->id;
+	$task->save();
+
+	$task = new Task();
+	$task->shortDesc = 'Seeded Task #2';
+	$task->longDesc = 'This is the second task created via the seed route.';
+	$task->priority = 1;
+	$task->tasklist_id = $tasklist->id;
+	$task->save();
+
+	$task = new Task();
+	$task->shortDesc = 'Seeded Task #3';
+	$task->longDesc = 'This is the third task created via the seed route.';
+	$task->priority = 1;
+	$task->tasklist_id = $tasklist->id;
+	$task->save();
+
+	$task = new Task();
+	$task->shortDesc = 'Seeded Task #4';
+	$task->longDesc = 'This is the fourth task created via the seed route.';
+	$task->priority = 1;
+	$task->tasklist_id = $tasklist->id;
+	$task->save();
 });

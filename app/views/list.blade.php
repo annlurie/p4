@@ -1,11 +1,14 @@
-<h1>Welcome to LIST READ</h1>
-<h2>This is the view that shows a single list if a param is passed, or all lists if not.</h2>
+@if (Session::has('message'))
+{{Session::get('message')}}
+@endif
+
+<h1>To-Do List</h1>
 @if (isset($listall))
-{{'All the lists!'}}
+{{'All Lists:'}}
 	@foreach($listall as $listall)
 		<li><a href="/list/view/{{$listall->id}}">{{ $listall->title }}</a></li>
 	@endforeach
-	<a href="/list/create">Add a new list</a>
+	<p><a href="/list/create">Add a new list</a></p>
 @endif
 @if (isset($tasklist))
 	<h2>{{ $tasklist->title }}</h2>
@@ -13,24 +16,28 @@
  	<a href="/list/update/{{$tasklist->id}}">Edit this list</a>. <br>
  	<a href="/list/delete/{{$tasklist->id}}">Delete this list</a>. <br>
 	<h2>Here are all the incomplete tasks associated with the list.</h2>
-	<p>Click a task name to edit it.</p>
+	<p>Click a task name to view it.</p>
 	@if (isset($tasks))
 		@foreach($tasks as $task)
 			@if ($task->complete == 0)
 					<p>
-					<strong><a href="/task/update/{{$task->id}}">{{ $task->shortDesc }}</a></strong>
-					<br>{{$task->longDesc}}<br>
-					<li><a href="/task/complete/{{$task->id}}"> {{' Complete Task'}} </a></li>
-					<li><a href="/task/delete/{{$task->id}}"> {{'Delete Task'}} </a></li>
+					<strong><a href="/task/view/{{$task->id}}">{{ $task->shortDesc }}</a></strong>
+					<br>{{$task->longDesc}}
+					<br>{{'Created: '.$task->created_at}}
+					<li><a href="/task/update/{{$task->id}}">{{ 'Edit Task' }}</a></li>
+					<li><a href="/task/complete/{{$task->id}}">{{'Complete Task'}}</a></li>
+					<li><a href="/task/delete/{{$task->id}}">{{'Delete Task'}}</a></li>
 					</p>
 			@endif
 		@endforeach
 	@endif
 	<h2>Here are the complete tasks associated with the list.</h2>
+	<p>Click a task name to view it.</p>
 	@if (isset($tasks))
 		@foreach($tasks as $task)
 			@if ($task->complete == 1)
-				<li><a href="/task/view/{{$task->id}}">{{ $task->shortDesc }}</a></li>
+				<p><strong><a href="/task/view/{{$task->id}}">{{ $task->shortDesc }}</a></strong><br>
+				Completed: {{ $task->updated_at }}</p>
 			@endif
 		@endforeach
 	@endif

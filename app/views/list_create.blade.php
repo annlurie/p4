@@ -1,5 +1,7 @@
+@if (Session::has('message'))
+{{Session::get('message')}}
+@endif
 
-<h1> Welcome to LIST CREATE </h1>
 <h2>Create a List:</h2>
 {{ Form::open(array('url' => '/list/create')) }}
 {{ Form::label('title', 'Title') }} <p>

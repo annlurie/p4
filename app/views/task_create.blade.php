@@ -1,4 +1,7 @@
-<h2>Welcome to TASK CREATE</h2>
+@if (Session::has('message'))
+{{Session::get('message')}}
+@endif
+
 <h2>Add A Task to a List:</h2>
 {{ Form::open(array('url' => '/task/create')) }}
 

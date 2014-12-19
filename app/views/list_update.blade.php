@@ -2,7 +2,7 @@
 {{Session::get('message')}}
 @endif
 
-<h1> Welcome to LIST UPDATE </h1>
+<h1>Update a List</h1>
 
 <h2>Editing List: {{$tasklist->title}}</h2>
 <p>{{$tasklist->desc}}</p>

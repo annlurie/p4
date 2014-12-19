@@ -83,7 +83,8 @@ Route::post('list/update/{tasklist_id}', function($id)
 	#echo Pre::render($tasklist->title);
 	#echo Pre::render($tasklist->desc);
 
-	return View::make('list')->with('tasks', $tasks)->with('tasklist', $tasklist);
+	#return View::make('list')->with('tasks', $tasks)->with('tasklist', $tasklist);
+	return Redirect::to('/list');
 });
 
 Route::get('/list/delete', function()
@@ -262,6 +263,39 @@ $foo = new Foobar;
 Route::get('/seed', function()
 {
 	$tasklist = new Tasklist();
+	$tasklist->title = 'Second Tasklist...';
+	$tasklist->desc = '...created via the seed route.';
+	$tasklist->save();
+	
+	$task = new Task();
+	$task->shortDesc = 'Seeded Task #1';
+	$task->longDesc = 'This is the first task created via the seed route.';
+	$task->priority = 1;
+	$task->tasklist_id = $tasklist->id;
+	$task->save();
+
+	$task = new Task();
+	$task->shortDesc = 'Seeded Task #2';
+	$task->longDesc = 'This is the second task created via the seed route.';
+	$task->priority = 2;
+	$task->tasklist_id = $tasklist->id;
+	$task->save();
+
+	$task = new Task();
+	$task->shortDesc = 'Seeded Task #3';
+	$task->longDesc = 'This is the third task created via the seed route.';
+	$task->priority = 3;
+	$task->tasklist_id = $tasklist->id;
+	$task->save();
+
+	$task = new Task();
+	$task->shortDesc = 'Seeded Task #4';
+	$task->longDesc = 'This is the fourth task created via the seed route.';
+	$task->priority = 1;
+	$task->tasklist_id = $tasklist->id;
+	$task->save();
+
+		$tasklist = new Tasklist();
 	$tasklist->title = 'First Tasklist...';
 	$tasklist->desc = '...created via the seed route.';
 	$tasklist->save();
@@ -276,14 +310,14 @@ Route::get('/seed', function()
 	$task = new Task();
 	$task->shortDesc = 'Seeded Task #2';
 	$task->longDesc = 'This is the second task created via the seed route.';
-	$task->priority = 1;
+	$task->priority = 2;
 	$task->tasklist_id = $tasklist->id;
 	$task->save();
 
 	$task = new Task();
 	$task->shortDesc = 'Seeded Task #3';
 	$task->longDesc = 'This is the third task created via the seed route.';
-	$task->priority = 1;
+	$task->priority = 3;
 	$task->tasklist_id = $tasklist->id;
 	$task->save();
 

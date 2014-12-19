@@ -1,25 +1,29 @@
-## Laravel PHP Framework
+#Readme File for Project 4 (Ann Lurie)
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+**Project URL:** [http://p4.annlurie.me](http://p4.annlurie.me)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+**Project Description:**
+This is a database-driven application for task management built using the Laravel framework. It allows users to create tasklists and add tasks to them. The tasks are created as 'incomplete' and can be updated in two ways: to edit the content of the task (short or long description) and to mark it complete. Tasks can also be deleted from a list. Completed tasks can no longer be edited from the list view (though a complete task can be rendered in the 'update' view directly via a route parameter).
+The main view in the app is 'List' which shows completed and incomplete tasks (with relevant view/edit/delete) links, as well as a form to add new tasks to an existing list.
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+**Demo Information:**
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+**Details for TA/Instructor:**
 
-## Official Documentation
+Use the /seed route to quickly create and populate a single list. A number of lists have been created already on the Production site.
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+Bootstrap remnants exist in the codebase, but I ended up stripping it out in frustration - couldn't get all views to properly render via Bootstrap and it was easier to work without it.
 
-### Contributing To Laravel
+**External Resources: Packages**
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
+Pre: [https://packagist.org/packages/paste/pre](https://packagist.org/packages/paste/pre)
 
-### License
+**External Resources: UI**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Bootstrap (not live in Production): [http://getbootstrap.com/](http://getbootstrap.com/)
+
+**External Resources: Other**
+
+Sublime Text Editor 
+
+Laravel Framework: [https://packagist.org/packages/laravel/framework](https://packagist.org/packages/laravel/framework)

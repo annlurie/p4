@@ -4,9 +4,9 @@
 
 <h2>Delete Task</h2>
 @if (isset($task))
-<h2>Are you sure you want to delete this task?</h2>
 <h3>{{$task->shortDesc}}</h3>
 {{$task->longDesc}}
+<h3>Are you sure you want to delete this task?</h3>
 @endif
 {{ Form::open(array('url' => '/task/delete')) }}
 @if (isset($task))

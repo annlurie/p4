@@ -2,7 +2,7 @@
 {{Session::get('message')}}
 @endif
 
-<h2>Create a List:</h2>
+<h1>Create a List</h1>
 {{ Form::open(array('url' => '/list/create')) }}
 {{ Form::label('title', 'Title') }} <p>
 {{ Form::text('title', '') }} <p>

@@ -8,6 +8,8 @@ The main view in the app is 'List' which shows completed and incomplete tasks (w
 
 **Demo Information:**
 
+Recorded Demo: [http://screencast.com/t/MAd3ZOUcIor](http://screencast.com/t/MAd3ZOUcIor)
+
 **Details for TA/Instructor:**
 
 Use the /seed route to quickly create and populate a single list. A number of lists have been created already on the Production site.
